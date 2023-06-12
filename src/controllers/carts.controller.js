@@ -1,8 +1,8 @@
 // import path from "path";
-// import CartManager from "../services/filesystem/services/cartManager.js";
-// import ProductManager from "../services/filesystem/services/productManager.js";
-import CartService from "../services/carts.service.js";
-import ProductService from "../services/products.service.js";
+// import CartManager from "../services/dao/filesystem/services/cartManager.js";
+// import ProductManager from "../services/dao/filesystem/services/productManager.js";
+import CartService from "../services/dao/db/services/carts.service.js";
+import ProductService from "../services/dao/db/services/products.service.js";
 
 // const car = new CartManager(path.join(".", "files"));
 const car = new CartService();

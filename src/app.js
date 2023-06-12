@@ -1,14 +1,18 @@
 import express, { urlencoded } from "express";
 import exphbs from "express-handlebars";
 import path from "path";
-import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import FileStore from "session-file-store";
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import cors from "cors";
 
 import _dirname from "./utils.js";
-import config from "../src/config/config.js";
+
+import config from "./config/config.js";
+import initializePassport from "./config/passport.config.js";
+import MongoSingleton from "./config/mongodb-singleton.js";
+
 import productRoutes from "./routes/products.routes.js";
 import cartRoutes from "./routes/carts.routes.js";
 import viewsRouter from "./routes/views.router.js";
@@ -17,21 +21,12 @@ import sessionsRouter from "./routes/sessions.router.js";
 import githubLoginViewRouter from "./routes/github-login.views.router.js";
 import emailRouter from "./routes/email.router.js";
 
-import passport from "passport";
-import initializePassport from "./config/passport.config.js";
-import MongoSingleton from "./config/mongodb-singleton.js";
-import cors from "cors";
-
-// const fileStorage = FileStore(session);
 const app = express();
 
 app.use(cors());
 
-// const SERVER_PORT = config.port;
 const PORT = config.port;
-// 8080;
 const MONGO_URL = config.mongoUrl;
-// "mongodb://localhost:27017/ecommerce?retryWrites=true&w=majority";
 
 // middleware
 app.use(express.json());
@@ -82,6 +77,9 @@ app.use("/users", usersViewRouter);
 app.use("/github", githubLoginViewRouter);
 app.use("/api/email", emailRouter);
 
+// console.log(`Puerto: ${PORT}`);
+// console.log(`Conexion: ${MONGO_URL}`);
+
 const httpServer = app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
@@ -94,27 +92,3 @@ const mongoInstance = async () => {
   }
 };
 mongoInstance();
-
-/*
-const connectMongoDB = async () => {
-  try {
-    await mongoose.connect(MONGO_URL);
-    console.log("Conectado con exito a MongoDB usando Moongose.");
-
-    // let student = await studentsModel.findOne({
-    //   _id: "640a705f72d18c48ca6f6741",
-    // });
-    // console.log(JSON.stringify(student, null, "\t"));
-
-    //student.courses.push({course: "640a719de27c256369c70d15"});
-    //console.log(JSON.stringify(student));
-
-    //let result = await studentsModel.updateOne(student);
-    //console.log(result);
-  } catch (error) {
-    console.error("No se pudo conectar a la BD usando Moongose: " + error);
-    process.exit();
-  }
-};
-connectMongoDB();
-*/

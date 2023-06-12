@@ -4,9 +4,11 @@
 
 ## -----------------------
 
-- [] Modificar nuestra capa de persistencia para aplicar los conceptos de Factory (opcional), DAO y DTO.
+- [x] Modificar nuestra capa de persistencia para aplicar los conceptos de Factory (opcional), DAO y DTO.
 
-- [] El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional).
+- [x] El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional).
+      ----- ( el parámetro --mode production toma los datos de .env.production )
+      --------
 
 - [] Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio.
 
@@ -14,9 +16,9 @@
 
 - [] Realizar un middleware que pueda trabajar en conjunto con la estrategia “current” para hacer un sistema de autorización y delimitar el acceso a dichos endpoints:
 
-  - [] Sólo el administrador puede crear, actualizar y eliminar productos.
+  - [x] Sólo el administrador puede crear, actualizar y eliminar productos.
   - [] Sólo el usuario puede enviar mensajes al chat.
-  - [] Sólo el usuario puede agregar productos a su carrito.
+  - [x] Sólo el usuario puede agregar productos a su carrito.
 
 - [] Crear un modelo Ticket el cual contará con todas las formalizaciones de la compra.
 

@@ -5,23 +5,24 @@ import {
   addProduct,
   updateProductById,
   deleteProductById,
-} from "../services/db/controllers/products.controller.js";
+  auth,
+} from "../controllers/products.controller.js";
 
 const router = Router();
 
 /***   Obtiene Todos los productos ***/
-router.get("/", getAllProducts);
+router.get("/", auth, getAllProducts);
 
 /***   Obtiene producto por ID ***/
 router.get("/:pid", getProductById);
 
 /***   Carga producto ***/
-router.post("/", addProduct);
+router.post("/", auth, addProduct);
 
 /*** Actualiza producto por ID ***/
-router.put("/:pid", updateProductById);
+router.put("/:pid", auth, updateProductById);
 
 /***   Elimina producto por ID ***/
-router.delete("/:pid", deleteProductById);
+router.delete("/:pid", auth, deleteProductById);
 
 export default router;

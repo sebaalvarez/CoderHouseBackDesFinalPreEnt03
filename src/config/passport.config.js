@@ -1,7 +1,7 @@
 import passport from "passport";
 import passportLocal from "passport-local";
 import GitHubStrategy from "passport-github2";
-import userModel from "../services/db/models/user.model.js";
+import userModel from "../services/dao/db/models/user.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 
 // Declaramos nuestra estrategia
@@ -98,6 +98,28 @@ const initializePassport = () => {
             console.warn("Invalid credentials for user: " + username);
             return done(null, false);
           }
+          return done(null, user);
+        } catch (error) {
+          return done(error);
+        }
+      }
+    )
+  );
+
+  // estrategia current
+  passport.use(
+    "current",
+    new localStrategy(
+      { passReqToCallback: true, usernameField: "email" },
+      async (req, username, password, done) => {
+        try {
+          const user = await userModel.findOne({ email: username });
+          req.session.user;
+          if (!user) {
+            console.warn("Invalid credentials for user: " + username);
+            return done(null, false);
+          }
+
           return done(null, user);
         } catch (error) {
           return done(error);

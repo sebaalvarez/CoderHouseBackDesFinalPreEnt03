@@ -12,9 +12,9 @@ export const createHash = (password) =>
 
 // validamos la contraseña con la que esta en la DB como hash
 export const isValidPassword = (user, password) => {
-  console.log(
-    `Datos a validar: user-password: ${user.password}, password: ${password}`
-  );
+  // console.log(
+  //   `Datos a validar: user-password: ${user.password}, password: ${password}`
+  // );
   return bcrypt.compareSync(password, user.password);
 };
 

@@ -1,6 +1,6 @@
 // import path from "path";
-// import ProductManager from "../services/filesystem/services/productManager.js";
-import ProductService from "../services/products.service.js";
+// import ProductManager from "../services/dao/filesystem/services/productManager.js";
+import ProductService from "../services/dao/db/services/products.service.js";
 
 // const pm = new ProductManager(path.join(".", "files"));
 const pm = new ProductService();
@@ -65,5 +65,19 @@ export async function deleteProductById(req, res) {
     });
   } catch (err) {
     res.status(400).send({ status: "Error", message: err });
+  }
+}
+
+export function auth(req, res, next) {
+  // console.log(req.session.user);
+  if (req.session.user && req.session.user.role == "admin") {
+    return next();
+  } else {
+    return (
+      res
+        .status(403)
+        // .send(`El usuario no tiene permisos para ingresar a esta página`)
+        .render("sinAcceso", {})
+    );
   }
 }

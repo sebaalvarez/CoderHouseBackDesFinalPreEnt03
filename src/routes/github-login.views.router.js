@@ -3,7 +3,7 @@ import {
   login,
   user,
   error,
-} from "../services/db/controllers/github-login.views.controller.js";
+} from "../controllers/github-login.views.controller.js";
 
 const router = Router();
 

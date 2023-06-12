@@ -8,7 +8,7 @@ import {
   deleteProductByIdCartId,
   updateQuantityProductById,
   addProductsByArray,
-} from "../services/db/controllers/carts.controller.js";
+} from "../controllers/carts.controller.js";
 
 const router = Router();
 

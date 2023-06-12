@@ -3,7 +3,7 @@ import {
   login,
   register,
   profile,
-} from "../services/db/controllers/users.views.controller.js";
+} from "../controllers/users.views.controller.js";
 
 const router = Router();
 
