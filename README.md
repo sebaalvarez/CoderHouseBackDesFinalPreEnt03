@@ -26,11 +26,11 @@
 
 - [x] Crear un modelo Ticket el cual contará con todas las formalizaciones de la compra
 
-  - [x]Id (autogenerado por mongo)
-  - [x]code: String debe autogenerarse y ser único
-  - [x]purchase_datetime: Deberá guardar la fecha y hora exacta en la cual se formalizó la compra (básicamente es un created_at)
-  - [x]amount: Number, total de la compra.
-  - [x]purchaser: String, contendrá el correo del usuario asociado al carrito.
+  - [x] Id (autogenerado por mongo)
+  - [x] code: String debe autogenerarse y ser único
+  - [x] purchase_datetime: Deberá guardar la fecha y hora exacta en la cual se formalizó la compra (básicamente es un created_at)
+  - [x] amount: Number, total de la compra.
+  - [x] purchaser: String, contendrá el correo del usuario asociado al carrito.
 
 ---
 
