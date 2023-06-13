@@ -1,11 +1,16 @@
 import passport from "passport";
 import passportLocal from "passport-local";
 import GitHubStrategy from "passport-github2";
+import jwtStrategy from "passport-jwt";
 import userModel from "../services/dao/db/models/user.model.js";
 import { createHash, isValidPassword } from "../utils.js";
+import { PRIVATE_KEY } from "../utils.js";
 
 // Declaramos nuestra estrategia
 const localStrategy = passportLocal.Strategy;
+
+const JwtStrategy = jwtStrategy.Strategy;
+const ExtractJWT = jwtStrategy.ExtractJwt;
 
 const initializePassport = () => {
   // estrategia github
@@ -44,6 +49,30 @@ const initializePassport = () => {
     )
   );
 
+  //Estrategia de obtener Token JWT por Cookie:
+  passport.use(
+    "jwt",
+    new JwtStrategy(
+      // extraer la  cookie
+      {
+        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
+        secretOrKey: PRIVATE_KEY,
+      },
+      // Ambiente Async
+      async (jwt_payload, done) => {
+        console.log("Entrando a passport Strategy con JWT.");
+        try {
+          console.log("JWT obtenido del payload");
+          console.log(jwt_payload);
+          return done(null, jwt_payload.user);
+        } catch (error) {
+          console.error(error);
+          return done(error);
+        }
+      }
+    )
+  );
+
   /**
    *  Inicializando la estrategia local, username sera para nosotros email.
    *  Done será nuestro callback
@@ -57,7 +86,7 @@ const initializePassport = () => {
       // usernameField: renombramos el username
       { passReqToCallback: true, usernameField: "email" },
       async (req, username, password, done) => {
-        const { first_name, last_name, email, age } = req.body;
+        const { first_name, last_name, email, age, role } = req.body;
         try {
           const exists = await userModel.findOne({ email });
           if (exists) {
@@ -69,6 +98,7 @@ const initializePassport = () => {
             last_name,
             email,
             age,
+            role,
             password: createHash(password),
           };
           const result = await userModel.create(user);
@@ -141,6 +171,21 @@ const initializePassport = () => {
       console.error("Error deserializando el usuario: " + error);
     }
   });
+};
+
+// Funcion para hacer la extraccion de la cookie
+const cookieExtractor = (req) => {
+  let token = null;
+  console.log("Entrando a cookie extractor");
+  if (req && req.cookies) {
+    //Validamos que exista el request y las cookies.
+    console.log("Cooikies presentes!");
+    console.log(req.cookies);
+    token = req.cookies["jwtCookieToken"];
+    console.log("token obtenido desde cookie");
+    console.log(token);
+  }
+  return token;
 };
 
 export default initializePassport;

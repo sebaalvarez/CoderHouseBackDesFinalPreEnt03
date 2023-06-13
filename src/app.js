@@ -21,6 +21,9 @@ import sessionsRouter from "./routes/sessions.router.js";
 import githubLoginViewRouter from "./routes/github-login.views.router.js";
 import emailRouter from "./routes/email.router.js";
 
+import jwtRouter from "./routes/jwt.router.js";
+import usersRouter from "./routes/users.router.js";
+
 const app = express();
 
 app.use(cors());
@@ -33,7 +36,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(_dirname, "public")));
 
-app.use(cookieParser());
+app.use(cookieParser("ClavePrivada"));
+
 app.use(
   session({
     // store: fileStorage({ path: "./sessions", ttl: 100, retries: 0 }),
@@ -76,6 +80,8 @@ app.use("/api/sessions", sessionsRouter);
 app.use("/users", usersViewRouter);
 app.use("/github", githubLoginViewRouter);
 app.use("/api/email", emailRouter);
+app.use("/api/jwt", jwtRouter);
+app.use("/api/users", usersRouter);
 
 // console.log(`Puerto: ${PORT}`);
 // console.log(`Conexion: ${MONGO_URL}`);

@@ -44,9 +44,9 @@ export async function addProduct(req, res) {
 
 export async function updateProductById(req, res) {
   try {
-    let user = req.body;
+    let info = req.body;
     let pid = req.params.pid;
-    let products = await pm.updateProductById(pid, user);
+    let products = await pm.updateProductById(pid, info);
     res.status(200).send({
       status: "Success",
       message: `Se actualizó el producto Id: ${pid}`,

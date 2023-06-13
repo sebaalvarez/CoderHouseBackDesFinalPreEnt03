@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authToken } from "../utils.js";
 import {
   getAllProducts,
   getProductById,
@@ -11,7 +12,7 @@ import {
 const router = Router();
 
 /***   Obtiene Todos los productos ***/
-router.get("/", auth, getAllProducts);
+router.get("/", authToken, getAllProducts);
 
 /***   Obtiene producto por ID ***/
 router.get("/:pid", getProductById);

@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { authToken } from "../utils.js";
+import { passportCall, authorization } from "../utils.js";
 import {
   login,
   register,
@@ -11,6 +13,11 @@ router.get("/login", login);
 
 router.get("/register", register);
 
-router.get("/", profile);
+router.get(
+  "/",
+  passportCall("jwt"), //-> Usando JWT por Cookie usando customCall
+  authorization("user"),
+  profile
+);
 
 export default router;

@@ -34,7 +34,7 @@ router.post(
     console.log("Registrando nuevo usuario.");
     res
       .status(201)
-      .send({ status: "success", message: "Usuario creado con extito." });
+      .send({ status: "success", message: "Usuario creado con exito." });
   }
 );
 
@@ -52,17 +52,25 @@ router.post(
         status: "error",
         error: "El usuario y la contraseña no coinciden!",
       });
-    req.session.user = {
-      name: `${user.first_name} ${user.last_name}`,
-      email: user.email,
-      age: user.age,
-      role: user.role,
-    };
-    res.send({
-      status: "success",
-      payload: req.session.user,
-      message: "¡Primer logueo realizado! :)",
-    });
+    //    -------------------------------------
+    // estas líneas son para generar la sesión
+    //    -------------------------------------
+    // req.session.user = {
+    //   name: `${user.first_name} ${user.last_name}`,
+    //   email: user.email,
+    //   age: user.age,
+    //   role: user.role,
+    // };
+    // res.send({
+    //   status: "success",
+    //   payload: req.session.user,
+    //   message: "Logueo realizado con exito",
+
+    //    -------------------------------------
+    // con estas líneas me genero un token
+    //    -------------------------------------
+    const acces_Token = generateJWToken(user);
+    res.send({ access_token: acces_Token });
   }
 );
 

@@ -8,6 +8,7 @@ import {
   deleteProductByIdCartId,
   updateQuantityProductById,
   addProductsByArray,
+  addPurchaseByCartById,
 } from "../controllers/carts.controller.js";
 
 const router = Router();
@@ -23,6 +24,9 @@ router.get("/:cid", getCartById);
 
 /***   Cargo Producto en Carrito ID ***/
 router.post("/:cid/products/:pid", addProductInCartById);
+
+/***   Realizo la compra del Carrito ID ***/
+router.post("/:cid/purchase", addPurchaseByCartById);
 
 /***    Borro todos los productos del carrito  ***/
 router.delete("/:cid", deleteAllProducts);

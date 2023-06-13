@@ -3,26 +3,29 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const collectionName = "tickets";
 
-const stringTypeSchemaUniqueRequired = {
-  type: String,
-  unique: true,
-  required: true,
-};
-
-const stringTypeSchemaNonUniqueRequired = {
-  type: String,
-  required: true,
-};
-
 const ticketSchema = new mongoose.Schema({
-  code: stringTypeSchemaUniqueRequired,
-  purchaser: stringTypeSchemaNonUniqueRequired,
+  code: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+  },
+
+  purchaser: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+
   amount: {
     type: Number,
     required: true,
   },
 
-  purchase_datetime: stringTypeSchemaNonUniqueRequired,
+  purchase_datetime: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 /**

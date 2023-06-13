@@ -8,6 +8,10 @@ export function register(req, res) {
 
 export function profile(req, res) {
   res.render("profile", {
-    user: req.session.user,
+    //la siguiente línea es si se utiliza sesiones
+    // user: req.session.user,
+
+    // la siguiente línea es si se utiliza JWT
+    user: req.user,
   });
 }
