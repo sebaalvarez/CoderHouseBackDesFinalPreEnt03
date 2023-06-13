@@ -9,9 +9,10 @@
 - [x] El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional).
       ///// ( el parámetro --mode production toma los datos de .env.production otro parámetro diferente tomalos datos de .env.development )
 
-- [] Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio.
+- [x] Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio.
 
-- [] Modificar la ruta /current Para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
+- [x] Modificar la ruta /current Para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
+      ///// la rura no es /current estoy usando /profile
 
 ---
 
