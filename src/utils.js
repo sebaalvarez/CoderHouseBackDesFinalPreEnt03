@@ -23,7 +23,7 @@ export const isValidPassword = (user, password) => {
 export const PRIVATE_KEY = "CoderhouseBackendCourseSecretKeyJWT";
 
 export const generateJWToken = (user) => {
-  return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "4h" });
+  return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "1h" });
 };
 
 /**
@@ -60,8 +60,8 @@ export const authToken = (req, res, next) => {
 // para manejo de errores
 export const passportCall = (strategy) => {
   return async (req, res, next) => {
-    console.log("Entrando a llamar strategy: ");
-    console.log(strategy);
+    // console.log("Entrando a llamar strategy: ");
+    // console.log(strategy);
     passport.authenticate(strategy, function (err, user, info) {
       if (err) return next(err);
       if (!user) {
