@@ -23,7 +23,7 @@ export const isValidPassword = (user, password) => {
 export const PRIVATE_KEY = "CoderhouseBackendCourseSecretKeyJWT";
 
 export const generateJWToken = (user) => {
-  return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "24h" });
+  return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "4h" });
 };
 
 /**
