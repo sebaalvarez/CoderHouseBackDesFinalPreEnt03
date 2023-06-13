@@ -19,6 +19,20 @@ export const isValidPassword = (user, password) => {
   return bcrypt.compareSync(password, user.password);
 };
 
+export function authSession(req, res, next) {
+  // console.log(req.session.user);
+  if (req.session.user && req.session.user.role == "admin") {
+    return next();
+  } else {
+    return (
+      res
+        .status(403)
+        // .send(`El usuario no tiene permisos para ingresar a esta página`)
+        .render("sinAcceso", {})
+    );
+  }
+}
+
 //JSON Web Tokens JWT functinos:
 export const PRIVATE_KEY = "CoderhouseBackendCourseSecretKeyJWT";
 
@@ -45,7 +59,9 @@ export const authToken = (req, res, next) => {
       .send({ error: "User not authenticated or missing token." });
   }
 
-  const token = authHeader.split(" ")[1]; //Se hace el split para retirar la palabra Bearer.
+  //Se hace el split para retirar la palabra Bearer.
+  const token = authHeader.split(" ")[1];
+
   //Validar token
   jwt.verify(token, PRIVATE_KEY, (error, credentials) => {
     if (error)
@@ -90,4 +106,5 @@ export const authorization = (role) => {
     next();
   };
 };
+
 export default _dirname;

@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { authToken } from "../utils.js";
-import { passportCall, authorization } from "../utils.js";
+import { passportCall, authorization, authToken } from "../utils.js";
 import {
   login,
   register,

@@ -4,7 +4,6 @@ import {
   getProductsByCart,
   getProducts,
   getHome,
-  auth,
 } from "../controllers/views.controller.js";
 
 const router = Router();

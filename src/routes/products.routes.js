@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authToken } from "../utils.js";
+import { authToken, authSession } from "../utils.js";
 import { passportCall, authorization } from "../utils.js";
 import {
   getAllProducts,
@@ -7,7 +7,6 @@ import {
   addProduct,
   updateProductById,
   deleteProductById,
-  auth,
 } from "../controllers/products.controller.js";
 
 const router = Router();
@@ -21,12 +20,12 @@ router.get("/", authToken, getAllProducts);
 router.get("/:pid", getProductById);
 
 /***   Carga producto ***/
-router.post("/", auth, addProduct);
+router.post("/", authSession, addProduct);
 
 /*** Actualiza producto por ID ***/
-router.put("/:pid", auth, updateProductById);
+router.put("/:pid", authSession, updateProductById);
 
 /***   Elimina producto por ID ***/
-router.delete("/:pid", auth, deleteProductById);
+router.delete("/:pid", authSession, deleteProductById);
 
 export default router;

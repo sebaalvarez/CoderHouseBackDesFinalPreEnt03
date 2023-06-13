@@ -38,16 +38,16 @@ export async function getProductsByCart(req, res) {
   res.render("productsByCart", { ...carts, usr });
 }
 
-export function auth(req, res, next) {
-  // console.log(req.session.user);
-  if (req.session.user) {
-    return next();
-  } else {
-    return (
-      res
-        // .status(403)
-        // .send(`El usuario no tiene permisos para ingresar a esta página`)
-        .render("sinAcceso", {})
-    );
-  }
-}
+// export function auth(req, res, next) {
+//   // console.log(req.session.user);
+//   if (req.session.user) {
+//     return next();
+//   } else {
+//     return (
+//       res
+//         // .status(403)
+//         // .send(`El usuario no tiene permisos para ingresar a esta página`)
+//         .render("sinAcceso", {})
+//     );
+//   }
+// }
